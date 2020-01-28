@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--
+  <element에 style 지정을 위한 3가지 기본 선택자>
+  
+    1)tag로 지정하기
+      :같은 이름을 한 모든 태그에 적용
+
+    2)id로 지정하기
+      :같은 id를 가진 것들에 모두 반영
+      but id는 하나만 쓰는 게 좋음
+
+    3)class로 지정하기
+
+  <CSS Selector의 다양한 활용>
+  
+    1)더 구체적으로 표시해줄 수 있음
+      ex) span#myspan
+          div.classname
+
+    2)그룹 선택
+      ex) h1, span, div {color:red;}
+          h1, span, div#id {color:red;}
+
+    3)하위 요소 선택
+    <div id="jisu">
+      <div>
+        <span> span tag </span>
+      </div>
+      <span> span tag 2 </span>
+    </div>
+      ex) #jisu span {color:red;}
+      모든 span태그에 red가 적용됨
+
+    4)자식 선택
+      ex) #jisu > span {color:red;}
+      span tag 2에만 red가 적용
+
+    5)n번째 자식요소를 선택
+      ex) #jisu > p:nth-child(2) {color:red;}
+-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style>
+
+    #myspan {
+      color:red;
+    }
+    
+    
+  </style>
+</head>
+<body>
+
+  <div>
+    <span id="myspan">
+      my text is upper!
+    </span>
+    <ul>
+      <li>
+        <span id="myspan">
+          my text is dummy
+        </span>
+        <div>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab esse itaque magnam nisi vitae est provident, aliquid beatae illum rerum, pariatur quasi? Quo delectus laudantium labore possimus aut minima ducimus!
+          </p>
+        </div>
+      </li>
+      <li></li>
+    </ul>
+  </div>
+  
+</body>
+</html>

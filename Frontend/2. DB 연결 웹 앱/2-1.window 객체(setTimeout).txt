@@ -1,0 +1,98 @@
+[window객체]
+
+브라우저 개발을 하다 보면 window객체가 있음.
+window에는 다양한 메서드들이 존재하며, 아래처럼 사용가능.
+window는 디폴트 개념이기에 생략가능.
+
+alert() //alert함수 안에 있는 인자 내용을 화면에 팝업 경고창으로 띄움
+window.setTimeout()
+setTimeout()
+
+
+[setTimeout 활용]
+
+setTimeout은 낯설게 동작.
+인자로 함수를 받고 있음. 이런 함수를 콜백함수라 하며, 보통은 즉시 실행되지 않고 나중에 필요한 시점에 실행됨. 실행이 안될 수도 있음.
+물론 실제로 콜백함수를 전달받은 쪽의 필요에 따라 즉시 실행될 수도 있음.
+자바스크립트는 함수를 인자로 받을 수 있는 특징을 가짐.
+또한 함수를 반환할 수도 있음.
+
+function run() {
+    setTimeout(function() {
+        var msg = "hello codesquad";
+        console.log(msg);  //이 메시지는 즉시 실행되지 않습니다.
+    }, 1000);
+}
+
+run();
+-> 1000밀리세컨드 즉 1초 뒤에 이 함수가 실행됨
+
+function run() {
+    console.log("run start");
+
+    setTimeout(function() {
+        var msg = "hello codesquad";
+        console.log(msg);
+        console.log("run .....ing");
+    }, 2000);
+
+    console.log("run end");
+}
+
+run();
+
+->
+run start
+run end
+hello codesquad
+run .....ing
+
+
+function run() {
+    setTimeout(function() {
+        var msg = "hello codesquad";
+        console.log(msg);
+    }, 2000);
+}
+
+console.log("run start");
+run();
+console.log("run end");
+
+->
+run start
+run end
+hello codesquad
+
+
+function run() {
+    setTimeout(function() {
+        var msg = "hello codesquad";
+        console.log(msg);
+    }, 2000);
+    console.log("run function end");
+}
+
+console.log("start");
+run();
+console.log("end");
+
+->
+start
+run function end
+end
+hello codesquad
+
+
+이와 같은 비동기 콜백 함수는 이벤트큐라는 곳에 보관되어 있다가
+스택에 쌓여있는 코드들이 다 비워지고 난 후
+(동기적인 다른 실행들이 끝난 후) 마지막에 실행이 됨.
+
+setTimeout의 특성을 잘 이해하고, 지연실행이 필요한 경우 잘 활용하면 좋음.
+
+<코멘트 중 유용해보이는 설명>
+setTimeout이 실행되면, setTimeout 안의 익명함수(1번째 인자)는 브라우저(Web API)가 일단 hold하고 있다가,
+주어진 시간(2번째 인자) 만큼이 지나면 event queue(혹은 task queue)로 이동해 대기하게 됩니다.
+event queue에서 계속 대기하고 있다가, call stack이 비워지면, 즉 stack에 아무런 코드도 없는 상황이 되면
+그 때 setTimeout 안의 함수가 call stack으로 이동(push)후 실행(pop)되게 됩니다.
+https://www.youtube.com/watch?v=8aGhZQkoFbQ 이 영상을 참고해 보세요.

@@ -1,0 +1,61 @@
+[함수 호출]
+
+자바스크립트 함수 호출은 이렇게 진행됨
+
+다음 함수를 실행해보자.
+
+function printName(firstname) {
+	var myname = "jisu";
+	return myname + " ," +  firstname;
+}
+
+function run(firstname) {
+	firstname = firstname || "Youn"; //자바스크립트에서 false가 되는 경우 : null, undefined, 공백문자
+	var result = printName(firstname);
+	console.log(result);
+}
+
+run이 호출되고 그 다음 printName이 호출됨.
+그러나 printName이 불려지는 순간에도 run함수는 끝나지 않음. 
+잠시 멈춰놓은 상태로 대기. 
+call stack.
+
+ex)
+function foo(b){
+	var a = 5;
+	return a * b + 10;
+} 
+
+function bar(x){
+	var y = 3;
+	return foo(x * y);
+}
+
+console.log(bar(6));
+
+위의 함수는 다음과 같이 call stack이 순서대로 쌓이게 됨
+
+foo(18)
+bar(6)
+console.log(bar(6))
+main()
+
+bar함수에서 foo를 호출한 후 foo함수의 결과를 받아올 때까지
+bar함수는 메모리 공간에서 사라지지 못하고 기다리고 있음.
+foo의 경우에는 실행이 끝나고 return문이 실행되면 메모리 공간에서 사라짐.
+즉 call stack에서 없어지는 것.
+
+디버깅, 문제해결, 프로그램 로직 작성 등에서 좀 더 단순하고, 복잡하지 않게, 성능이 좋게 하기 위해서는
+함수를 계속 나누고 합치는 과정을 거치게 됨.
+이러한 함수에 대한 기본 이해가 없다면 그런 과정이 굉장히 힘들 것.
+
+call stack은 이렇게 동작하지만 함수를 연속적으로 계속 호출할 경우
+call stack이 꽉 차버리면서 더 이상 실행되지 못하고 오류가 발생. 
+브라우저에서는 대부분 지정된 횟수만큼만 call stack을 쌓게 미리 설정해둔 경우가 많기 때문.
+따라서 혹시 개발 중에 Maximum call stack size exceeded 오류를 발견해도 너무 놀라지 말고 대처할 것.
+
+
+[좀 더 해 볼만한 것]
+
+- 구글 검색창에 javascript call stack을 찾아 노출되는 글을 살펴볼 것
+- 샘플코드를 구현해 보고 크롬 개발자 도구의 콘솔창에서 실행한 후에, source탭에서 call stack을 확인해볼 것.

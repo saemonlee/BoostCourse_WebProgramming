@@ -1,0 +1,61 @@
+[DOM]
+
+브라우저에서는 HTML코드를 DOM(Document Object Model)이라는 객체 형태의 모델로 저장.
+그렇게 저장된 정보를 DOM Tree라고 함. 결국 HTML element는 Tree형태로 저장됨.
+
+HTML로 만든 페이지는 일부분의 HTML이 빠진다거나 변경될 수 있는데,
+어떤 구조체를 가지고 있어야 변경이 쉽기 때문.
+
+자바스크립트를 이용하면 어떤 부분을 찾고 삭제하는 것을 할 수 있음.
+그러나 복잡한 DOM Tree를 탐색하기 위해 자바스크립트로 탐색 알고리즘을 구현하는 것은 힘든 일.
+그래서 브라우저에서는 DOM Tree를 찾고 조작하는 걸 쉽게 도와주는 다양한 DOM API(함수 묶음)를 제공.
+
+
+[getElementById()]
+
+ID정보를 통해 찾을 수 있음.
+DOM객체.getElementById()
+
+ex)
+document.getElementById("nav-cart-count");
+-> 전체 html문서 중(document는 html 최상위 엘리먼트) id속성이 nav-cart-count인 녀석을 찾아줌
+
+document.getElementById("nav-cart-count").className;
+-> 특정 id값을 가진 엘리먼트의 클래스명 찾기
+
+document.getElementById("nav-cart-count").style.display = "none";
+-> css 디스플레이 속성을 none으로 싶다는 명령어
+
+document.getElementById("nav-cart-count").innerText = "있어";
+-> html로 들어있는 텍스트 정보를 수정
+
+
+[querySelector]
+
+selector로 어떤 것들을 찾아주는 것.
+DOM을 찾는데 특히 유용.
+CSS 스타일을 결정할 때 사용하거나, Selector문법을 활용해 DOM에 접근 가능.
+(querySelector안에 넣는 문법을 CSS Selector라고 함.
+그냥 쓰면 태그을 찾는 것으로 인식.
+앞에 #을 붙이면 id를 찾아줌.
+앞에 .을 붙이면 class를 찾아줌.)
+DOM을 찾을 때 querySelector만 써도 충분하고 빠르다.
+
+참고로 비슷하지만 다른 querySelectorAll이 있음.
+이건 찾는 모든 element가 노드 리스트 형태로 나옴.
+
+ex)
+document.querySelector("div");
+->html에서 첫번째 div태그를 찾아줌
+
+document.querySelector("a");
+->html에서 첫번째 a태그를 찾아줌
+
+document.querySelector("#nav-cart-count");
+->html에서 해당 id를 가진 태그를 찾아줌
+
+document.querySelector(".nav-line-2");
+->html에서 해당 class를 가진 첫 번째 태그를 찾아줌
+
+document.querySelector("body .nav-line-2");
+document.querySelector(".nav-line-2 > .nav-arrow");

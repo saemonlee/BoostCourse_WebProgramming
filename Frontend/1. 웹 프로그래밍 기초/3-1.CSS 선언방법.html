@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+  스타일을 HTML에 적용하는 세 가지
+
+    - inline
+      : HTML 태그 안에다 넣는 방법
+
+    - internal
+      : head 안에 바로 style을 넣음
+        별도의 CSS파일을 관리하지 않아도 됨
+        서버에 CSS 파일을 부르기 위해 브라우저가 별도의 요청을 또 보내는 일을 하지 않음
+
+    - external
+      : 별도의 CSS 파일을 만들어 include
+        보통 이런 식으로 많이 함
+
+  세 방법을 겹쳐서 적용했을 때는
+  inline>internal=external 순으로 우선순위 적용
+  겹치는 선언이 있을 경우 나중에 선언된 속성이 반영
+
+  HTML에 CSS를 집어넣는 것은 그렇게 좋은 방법은 아님
+  -> 구조와 스타일이 섞여있기에 유지보수/관리가 어려움
+-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style>
+    div > p {
+      font-size:20px;
+    }
+  </style>
+  <link rel="stylesheet" href="css_basic.css">
+</head>
+<body>
+  <div>
+    <p style="color:blue;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda aspernatur non illum dolor laboriosam deleniti magnam mollitia vitae quas natus officiis nam, explicabo accusamus libero odit, ducimus quae voluptatem expedita!</p>
+  </div>
+</body>
+</html>

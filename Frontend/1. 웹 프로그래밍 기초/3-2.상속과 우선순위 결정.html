@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+  <상속>
+  CSS 또한 부모의 설정을 자식이 이어 받는 상속이 가능
+  padding, border와 같은 배치와 관련된 속성은 상속받지 않음
+
+  <Cascading>
+  CSS는 여러 스타일 정보를 기반으로 최종적으로 경쟁에 의해 적절한 스타일이 반영
+
+    1)선언방식에 따른 차이
+      :inline>internal=external
+
+    2)동일하면 나중의 것이 적용됨
+
+    3)더 구체적으로 표현된 것을 우선해서 적용
+
+    4)id>class>element
+
+  * 구글에 CSS specificity 검색
+-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+  <style>
+    body > div {
+      color:green;
+      font-size:30px;
+      border:2px solid slategray;
+      padding:30px;
+    }
+  </style>
+<body>
+
+  <div>
+    <span>my text is upper!</span>
+    <ul>
+      <li>
+        <span>
+          my text is dummy
+        </span>
+        <div>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam eum aut a eos aperiam saepe accusantium nulla libero impedit ut quos ipsam laudantium quisquam, odit repellat, molestias quae, assumenda! Modi.
+          </p>
+        </div>
+      </li>
+      <li></li>
+    </ul>
+  </div>
+  
+</body>
+</html>

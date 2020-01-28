@@ -1,0 +1,56 @@
+[Event]
+
+브라우저에는 많은 이벤트가 발생.
+브라우저 화면의 크기를 마우스로 조절할 때도, 스크롤을 할 때도,
+새로고침할 때도, 마우스로 이동하거나 무언가를 선택할 때도 이벤트가 발생.
+그 때마다 브라우저는 어떤 이벤트 정보를 알려줌.
+이벤트를 브라우저가 발생시켜 주니, 우리는 그 때 어떤 일을 하라고 할 일을 등록할 수가 있습니다.
+
+다시 말해,
+HTML 엘리먼트 별로 어떤 이벤트(주로 키보드나 마우스 관련)가 발생했을 때 특정 행위(어떤 일)를 하고 싶다면,
+대상 엘리먼트를 찾고 어떤 일을 등록하면 된다. 그것을 자바스크립트로 구현할 수 있습니다.
+
+
+[이벤트 등록]
+
+이벤트 등록 표준방법.
+이벤트 정보를 받아서 무언가 하려면 element객체 아래에 있는 메서드인 addEventListner함수를 사용.
+브라우저는 모든 것을 알려주기에,
+이렇게 알려주는 것 중 특정 정보를 선택적으로 미리 등록해 두고 어떤 일들을 하게 할 수 있음.
+
+var el = document.querySelector(".outside");
+el.addEventListener("click", function(){
+//do something..
+}, false);
+->해당 엘리먼트에 클릭이 일어나면 이 함수를 실행해줘라고 해놓은 것
+
+
+addEventListener함수의 두 번째 인자는 함수다.
+이 함수는 나중에 이벤트가 발생할 때 실행되는 함수로 이벤트핸들러 또는 이벤트리스너라고 한다.
+Event Handler(Event Listner) 콜백 함수는 이벤트가 발생할 때 실행됨.
+
+
+[이벤트 객체]
+
+이벤트리스너가 실행될 때 어떤 이벤트에 의해서 실행됐는지,
+이벤트 객체를 매개변수로 생성.
+따라서 이벤트리스너 안에서는 이벤트 객체를 활용해 추가적인 작업을 할 수 있게 된다.
+
+var el = document.getElementById("outside");
+el.addEventListener("click", function(evt){
+	var target = evt.target
+	console.log(target);
+	console.log(target.nodeName);
+	console.log(target.innerText);
+	debugger; // 타겟 정보가 더 궁금할 땐 디버거를 걸고 실험을 해볼 수도 있음
+}, false);
+
+가장 많이 쓰이는 건 event.target이다.
+해당 이벤트가 발생한 element를 가리킨다.
+element도 객체임으로, 그 안에 있는 className 등 element가 가진 속성을 사용할 수 있음.
+
+
+[좀 더 해 볼만한 것]
+
+event type에는 어떤 것들이 있을까?
+마우스, 키보드 관련 타입들을 자세히 알아볼 것

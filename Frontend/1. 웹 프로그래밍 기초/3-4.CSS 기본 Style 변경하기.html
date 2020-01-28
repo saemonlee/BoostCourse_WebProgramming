@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+  <color>
+    - 색상 이름   ex) red
+    - rgb        ex) rgb(255,0,0)
+    - rgba       ex) rgba(255,0,0,0.5)
+    - 16진수      ex) #ff0000
+    - 16진수 축약 ex) #f00
+
+  <font-size>
+    - px : 픽셀
+    - em : 기준값(기본 16px) 대비 상대적인 크기
+           부모에 의해 상속받은 기준값의 절대치가 바뀔 수 있음
+
+  <font-family>
+    - 폰트 이름 ex) "Gulim", monospace
+    - 콤마 기준으로 쭉 나열해 지원하지 않을 경우 사용할 폰트 지정 가능
+-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style>
+    body > div {
+      font-size:16px;
+      background-color:#ff0;
+      font-family:"Gulim";
+    }
+    .myspan {
+      color:#f00;
+      font-size:2em;
+    }
+  </style>
+</head>
+<body>
+  
+  <div>
+    <span class="myspan">
+      my text is upper!
+    </span>
+  </div>
+  
+</body>
+</html>

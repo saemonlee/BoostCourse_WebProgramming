@@ -1,0 +1,114 @@
+#ex1 {
+  margin-bottom:20px;
+}
+
+#ex1 > .inline {
+  width:100px;
+  height:100px;
+  border:1px solid gray;
+  display:inline;
+}
+
+#ex2 {
+  margin-bottom:20px;
+}
+
+#ex2 > * {
+  display:block;
+  border:1px solid gray;
+}
+
+#ex3 {
+  margin-bottom:20px;
+}
+
+#ex3 {
+  position:relative;
+  /*relative도 기본적으로 top, left값이 없다면 아무런 변화x*/
+}
+
+#ex3 > div {
+  width:150px;
+  height:100px;
+  border:1px solid gray;
+  text-align:center;
+  line-height:100px;
+}
+
+.relative {
+  position:relative;
+  left:10px;
+}
+
+.absolute {
+  position:absolute;
+  left:130px;
+  top:30px;
+  /*top, left값을 주는 게 좋음*/
+}
+
+.fixed {
+  position:fixed;
+  top:250px;
+  background-color:rgba(255,0,0,0.5);
+}
+
+#ex4 {
+  margin-bottom:20px;
+}
+
+#ex4 * {
+  border:1px solid gray;
+}
+
+.bottom {
+  margin-top:100px;
+  margin-left:100px;
+}
+
+#ex5 {
+  margin-bottom:20px;
+}
+
+#ex5 > div {
+  width:100px;
+  height:100px;
+  border:1px solid gray;
+  font-size:0.7em;
+}
+
+.blue {
+  background-color:blue;
+}
+
+.green {
+  float:left;
+  background-color:green;
+  margin-left:120px;
+}
+
+.red {
+  background-color:red;
+  1position:relative;
+  1left:10px;
+}
+
+#ex6 {
+  margin-bottom:20px;
+}
+
+#ex6 > div {
+  width:100px;
+  height:100px;
+  border:1px solid red;
+  padding:10px;
+  font-size:0.8em;
+}
+
+.box-content {
+  box-sizing:content-box;
+}
+
+.box-border {
+  box-sizing:border-box;
+}

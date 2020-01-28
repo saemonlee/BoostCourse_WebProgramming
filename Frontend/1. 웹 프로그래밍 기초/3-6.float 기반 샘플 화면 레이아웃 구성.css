@@ -1,0 +1,55 @@
+header {
+  background-color:#eee;
+}
+
+#wrap {
+  overflow:auto;
+  /*float된 자식을 자식으로 인식할 수 있게 해줌*/
+  margin:20px 0px;
+}
+
+footer {
+  background-color:#eee;
+  clear:left;
+  /*float된 블럭을 인식하게 해줌*/
+}
+
+.left, .right, .realright {
+  float:left;
+  height:200px;
+}
+
+.left {
+  width:17%;
+  /*가변폭*/
+  margin-right:3%;
+  background-color:#47c;
+}
+
+.right {
+  width:60%;
+  text-align:center;
+    background-color:#47c;
+}
+
+.right > h2 {
+  position:relative;
+}
+
+.right .emoticon {
+  position:absolute;
+  top:0px;
+  right:25%;
+  color:#fff;
+}
+
+.realright {
+  width:17%;
+  margin-left:3%;
+  background-color:#67c;
+  
+}
+
+li {
+  list-style:none;
+}

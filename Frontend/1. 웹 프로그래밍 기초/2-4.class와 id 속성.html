@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+  id는 고유한 속성.
+  하나만 써야 된다고는 하지만 하나 이상 써도 오류가 나오진 않음
+  (의도적으로 하나만 쓰도록 노력)
+  고유한 id값이 있으면 하나하나에 특별한 제어를 할 수 있으며 검색에도 용이
+
+  class는 하나의 html 안에서 중복해서 사용 가능
+  CSS class를 하나 만들어 두고,
+  여기 저기 같은 class 이름을 부여함으로서 같은 class 이름을 가진 가진 것들이 같은 스타일을 갖게 됨
+  하나의 태그에 여러 다른 clas 이름을 공백을 기준으로 나열할 수 있음
+  홈페이지 전체적인 스타일을 일관성 있게 지정하기 위해서는 class가 필수적
+
+  이 페이지에서 이 class 속성을 가진 게 하나 밖에 없어도 class 사용 가능
+  이건 팀이나 개인이 개발할 때 룰을 만들어두고 사용하면 됨
+  (어느 곳에서는 id 사용을 금하고 class만 사용하기도 함)
+-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+  <header>
+    <h1>Company Name</h1>
+    <img src="...." alt="logo">
+  </header>
+  
+  <section id="container">
+    <nav id="nav-section">
+      <ui>
+        <li>Home</li>
+        <li>Home</li>
+        <li>About</li>
+        <li>Map</li>
+      </ui>
+    </nav>
+    
+    <section id="roll-section">
+      <button></button>
+      <div><img src="dd" alt=""></div>
+      <div><img src="dd" alt=""></div>
+      <div><img src="dd" alt=""></div>
+      <button></button>
+    </section>
+    
+    <section>
+      <ul>
+        <li class="our_description">
+          <h3>About us</h3>
+          <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maxime molestiae perspiciatis velit quos magni asperiores deserunt, vel, temporibus quidem est ducimus voluptate maiores numquam aspernatur ea, beatae animi laborum!</div>
+        </li>
+        <li class="our_description">
+          <h3>What we do</h3>
+          <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque animi dolorem doloremque sapiente delectus. Iusto earum in magnam eos fugiat vel rem, voluptatibus inventore veniam placeat qui, minima non ullam.</div>
+        </li>
+        <li class="our_description">
+          <h3>Contact us</h3>
+          <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, nesciunt, porro! Inventore aut nobis dolores dignissimos quos adipisci sint recusandae unde, quam et ullam repudiandae, expedita nemo, natus assumenda perspiciatis!</div>
+        </li>
+      </ul>
+    </section>
+  </section>
+  
+  <footer>
+    <span>Copyright @codesquad</span>
+  </footer>
+</body>
+</html>

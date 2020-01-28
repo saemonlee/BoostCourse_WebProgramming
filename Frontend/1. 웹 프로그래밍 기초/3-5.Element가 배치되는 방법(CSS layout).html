@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--
+  <엘리먼트가 배치되는 방식>
+
+    layout작업 or Rendering과정
+      :엘리먼트(HTML 태그)를 화면에 '배치'하는 것
+
+    엘리먼트는 위에서 아래로 순서대로 블럭을 이루면서 배치되는 것이 기본
+    이를 다양한 방식으로 배치할 수 있도록 css에서는 추가적인 속성을 제공
+
+      -display:
+        >block: 대부분. div, p 등. 어떤 영역을 가진 기본 속성
+                inline속성을 가진 태그도 display에 block을 주면 위아래로 쌓임
+        >inline: span, a, strong 등. 블록레벨을 가지고 있지 않아 위에서 아래로 쌓이지 않고 좌우로 나열됨. 꽉 차면 아래칸의 빈자리를 차지.
+                 높이와 넓이를 지정해도 반영되지 않음
+                 block속성을 가진 태그도 display에 inline을 주면 좌우로 배치되게 됨
+        >inline-block
+
+      -position: 특별한 값을 가지면서 배치가 되는 속성들
+                 position속성을 사용하면 상대적/절대적으로 어떤 위치에 엘리먼트를 배치하는 것이 수월
+        >static: 기본값. 순서대로 배치
+        >absolute: 기준점이 있어야 함. 상위 엘리먼트 중에 static이 아닌 position이 기준점
+                   그렇기에 position:absolute를 쓰기 위해서는 기준점이 될 상위 엘리먼트의 position에 static이 아닌 relative 같은 속성을 부여
+                   기준점을 기준으로 특별한 위치에 배치.
+                   top/left/right/bottom으로 설정
+        >relative: 원래 자신이 위치해야 할 곳을 기준으로 상대적인 값 부여
+                   top/left/right/bottom으로 설정
+        >fixed: 스크롤에 상관없이 화면 위에 고정됨
+                전체화면 좌측, 맨 위를 기준으로 동작
+
+      -margin: 간격을 다르게 해서 배치하기
+               위/아래/좌/우 엘리먼트와 본인 간의 간격
+
+      -float: 기본적인 쌓이는 순서(flow)에서 벗어나서 다르게 배치되는 특별한 속성
+              원래 flow에서 벗어나기에 뒤의 block엘리먼트가 float된 엘리먼트를 인식하지 못하고 중첩되서 배치됨
+        >left
+        >right
+
+  <box-model>
+    하나의 블록 엘리먼트는 box형태.
+    블록 엘리먼트의 경우 box의 크기와 간격에 관한 속성으로 배치를 추가 결정
+      -margin
+      -padding
+      -border
+      -outline
+      -box-shadow
+
+    엘리먼트의 크기:
+      block엘리먼트의 크기는 기본적으로 부모의 크기만큼 가짐
+      width:100%는 부모의 크기만큼을 다 갖는 것과 같음
+
+    box-sizing과 padding:
+      padding속성을 늘리면 엘리먼트의 크기가 달라질 수 있음
+      box-sizing속성으로 이를 컨트롤.
+      box-sizing속성을 border-box로 설정하면 엘리먼트의 크기를 고정하면서 padding값만 늘릴 수 있음
+
+  <layout 구현 방법>
+    전체 레이아웃은 float를 잘 사용해서 2단, 3단 컬럼 배치를 구현
+    최근에는 css-grid나 flex속성 등 layout을 위한 속성을 사용하기 시작. 브라우저 지원범위를 확인해서 사용
+
+    특별한 위치에 배치하기 위해서는 position absolute를 사용. 기준점은 relative로 설정
+
+    내비게이션과 같은 엘리먼트는 block엘리먼트를 inline-block으로 변경해서 가로로 배치하기도 함
+
+    엘리먼트 안의 텍스트 간격과, 다른 엘리먼트 간의 간격은 padding과 margin속성을 잘 활용해서 배치
+-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+  
+<div id="ex1">
+    <div class="inline">div1</div>
+    <div class="inline">div2</div>
+    <p class="inline">p tag</p>
+    <div class="inline">div3</div>
+    <div class="inline">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet consequuntur dicta eaque at ipsum quasi repellat, quam veritatis numquam, delectus illo voluptatum officiis earum dolorem, sapiente velit ipsa voluptas nesciunt!</div>
+  </div>
+  
+  <div id="ex2">
+    <span>나는 어떻게 배치되나요?</span>
+    <span>좌우로 배치되는군요</span>
+    <a href="">링크는요?</a>
+    <strong>링크도 강조도 모두 좌우로 흐르는군요</strong>
+  </div>
+  
+  <div id="ex3">
+    <div class="static">static(default)</div>
+    <div class="relative">relative(left:10px)</div>
+    <div class="absolute">absolute(left:130px;top:30px)</div>
+    <div class="fixed">fixed(top:250px)</div>
+  </div>
+  
+  <div id="ex4">
+    <div>
+      <div class="top">top</div>
+      <div class="bottom">bottom</div>
+    </div>
+  </div>
+  
+  <div id="ex5">
+    <div class="blue"></div>
+    <div class="green"></div>
+    <div class="red"></div>
+  </div>
+  
+  <div id="ex6">
+    <div class="box-content">
+      box-content<br>(100px보다 커짐)
+    </div>
+    
+    <div class="box-border">
+      box-border<br>(100px유지)
+    </div>
+  </div>
+  
+</body>
+</html>
