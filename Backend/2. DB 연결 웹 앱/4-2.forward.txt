@@ -1,0 +1,28 @@
+[forward란?]
+
+1. 웹 브라우저에서 Servlet1에게 요청을 보냄
+
+2. Servlet1은 요청을 처리한 후, 그 결과를 HttpServletRequest에 저장
+   -> Servlet1의 결과값을 Servlet2에서도 사용할 수 있도록 하기 위해.
+      일반적인 지역변수로 선언한 값은 다른 서블릿에서는 접근할 수 없음
+
+3. Servlet1은 결과가 저장된 HttpServletRequest와
+   응답을 위한 HttpServletResponse를
+   같은 웹 어플리케이션 안에 있는 Servlet2에게 전송(forward)
+   -> WAS 안에 request, response 객체가 만들어져는 있지만 레퍼런수 변수를 알지 못한다면 사용불가
+      그래서 forward 할 때 인자로 request, response를 넘겨줌
+
+4. Servlet2는 Servlet1으로부터 받은
+   HttpServletRequest와 HttpServletResponse를 이용하여
+   요청을 처리한 후 웹 브라우저에게 결과를 전송
+
+즉 Servlet1이 클라이언트에게 받은 요청을 혼자 다 처리하지 않고,
+일정 부분까지만 혼자 처리하고 나머지를 다른 서블릿에게 넘겨주는 작업을 뜻함
+
+redirect: 실행 후 url이 바뀜. 요청이 두 번 이루어지기 때문
+          -> request, response 객체가 두 번 만들어짐
+forward: url이 바뀌지 않음. 요청이 한 번 이루어지기 때문
+         -> request, response 객체가 한 번 만들어짐
+
+forward는 요청이 들어와서 서버가 내부적으로 옮겨줬을 뿐, 새로운 요청이 들어온 것은 아님
+그렇기 때문에 이 클라이언트가 한 번 요청했을 때 만들어졌던 요청/응답 객체가 그대로 유지
