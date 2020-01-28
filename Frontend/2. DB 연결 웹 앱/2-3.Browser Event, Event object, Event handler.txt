@@ -54,3 +54,4 @@ element도 객체임으로, 그 안에 있는 className 등 element가 가진 �
 
 event type에는 어떤 것들이 있을까?
 마우스, 키보드 관련 타입들을 자세히 알아볼 것
+
