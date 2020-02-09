@@ -1,0 +1,19 @@
+[Request scope]
+
+- http요청을 WAS가 받아서 웹 브라우저에게 응답할 때까지 변수값을 유지하고자 할 경우 사용.
+
+- HttpServletRequest객체에 값을 맡겨놓는 것을 request scope라고 함. 
+  request객체는 어떤 서블릿 등에서 만든 값을 다른 서블릿/JSP에서 이용할 수 있도록 범위를 유지시켜 줌.
+  요청을 수행하고 응답이 나가게 되면 만들어졌던 request객체와 response객체는 사라짐. -> 즉, 요청이 들어와서 응답이 나갈 때까지 유지되는 객체.
+  request라는 객체에 저장을 해놓으면 클라이언트로부터 요청을 받아 응답을 할 때까지 유지가 됨.
+
+- JSP에서는 request내장 변수를 사용.
+- 서블릿에서는 HttpServletRequest객체를 사용.
+
+- 값을 저장할 때는 request객체의 setAttribute()메서드를 사용.
+- 값을 읽어들일 때는 request객체의 getAttrubute()메서드를 사용.
+
+- forward 시 값을 유지하고자 사용.
+- 앞에서 forward에 대해 배울 때 forward하기 전 request객체의 setAttribute()메서드로 값을 설정한 후,
+  서블릿이나 JSP에게 결과를 전달하여 값을 출력하도록 함.
+  이렇게 포워드 되는 동안 값을 유지하기 위해 Request scope를 이용.
