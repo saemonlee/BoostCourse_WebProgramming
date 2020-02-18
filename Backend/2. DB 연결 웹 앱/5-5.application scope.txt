@@ -1,0 +1,18 @@
+[Application scope]
+
+- 하나의 서버에는 다수의 웹 어플리케이션이 존재 가능
+  -> application scope란 이 하나의 웹 어플리케이션 내에서
+     값을 저장해놓고 사용할 수 있는 영역
+- 웹 어플리케이션이 시작되고 종료될 때까지 변수를 사용할 수 있음
+- ServletContext 인터페이스를 구현한 객체를 사용
+
+- JSP에서는 application 내장 객체를 이용
+- 서블릿의 경우는 getServletContext()메서드를 이용
+
+- 웹 어플리케이션 하나 당 하나의 application 객체가 사용됨
+- 값을 저장할 때는 application 객체의 setAttribute()메서드 사용
+- 값을 읽어들일 때는 application 객체의 getAttribute()메서드 사용
+
+- 모든 클라이언트가 공통으로 사용해야 할 값들이 있을 때 사용
+  -> 어떤 클라이언트가 이 웹 어플리케이션에 접근한다 하더라도
+     application scope에 해당하는 부분은 하나 뿐.
