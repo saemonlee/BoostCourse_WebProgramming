@@ -1,0 +1,163 @@
+[SQL(Structured Query Language)]
+
+- SQL은 데이터를 보다 쉽게 검색하고 추가, 삭제, 수정같은 조작을 할 수 있도록 고안된 컴퓨터 언어.
+- 관계형 데이터베이스에서 데이터를 조작하고 쿼리하는 표준 수단.
+
+- DML(Data Manipulation Language) : 데이터를 '조작'하기 위해서 사용.
+                                    INSERT, UPDATE, DELETE SELECT 등이 해당
+- DDL(Data Definition Language) : 데이터베이스의 스키마를 '정의'하거나 조작하기 위해서 사용.
+                                  CREATE, DROP, ALTER 등이 해당.
+- DCL(Data Control Language) : 데이터를 '제어'하는 언어.
+                               데이터의 보안, 무결성 등을 정의.
+                               권한을 주거나, 파기하거나, 트랜잭션을 부여하거나, 커밋하거나, 롤백하거나...
+                               GRANT, REVOKE 등이 해당
+
+
+[Database 생성하기]
+
+- 콘솔에서 다음과 같이 명령을 실행.
+  MySQL 관리자 계정인 root로 데이터베이스 관리 시스템에 접속하겠다는 뜻.
+
+mysql -uroot -p
+
+
+- window 사용자는 설치시에 입력했던 암호를 입력.
+  Mac 사용자는 암호가 없으니 그냥 엔터를 입력.
+
+- 관리자 계정으로 MySQL에 접속했다면, 다음과 같은 명령으로 데이터베이스를 생성.
+
+mysql> create database DB이름;
+
+
+- 우리는 다음과 같은 명령을 실행해 DB이름을 "connectdb"로 생성.
+
+mysql> create database connectdb;
+
+
+[Database 사용자 생성과 권한 주기]
+
+- Database를 생성했다면, 해당 데이터베이스를 사용하는 계정을 생성해야 함.
+  또한, 해당 계정이 데이터베이스를 이용할 수 있는 권한을 줘야 함.
+  아래와 같은 명령을 이용해 사용자 생성과 권한을 줄 수 있음.
+  db이름 뒤의 *는 모든 권한을 의미.
+  @'%'는 어떤 클라이언트에서든 접근 가능하다는 의미.
+  @'localhost'는 해당 컴퓨터에서만 접근 가능하다는 의미.
+
+- flush privileges는 DBMS에게 적용을 하라는 의미.
+  해당 명령을 반드시 실행해줘야 함.
+
+grant all privileges on db이름.* to 계정이름@'%' identified by '암호';
+grant all privileges on db이름.* to 계정이름@'localhost' identified by '암호';
+flush privileges;
+
+* grant : 권한을 주는 명령
+
+
+- 사용자 계정 이름은 'connectuser', 암호는 'connect123!@#',
+  해당 사용자가 사용하는 데이터베이스는 'connectdb'로 계정을 생성하려면 다음과 같이 명령을 수행.
+
+grant all privileges on connectdb.* to connectuser @'%' identified by 'connect123!@#';
+grant all privileges on connectdb.* to connectuser @'localhost' identified by 'connect123!@#';
+flush privileges;
+
+
+[생성한 Database에 접속하기]
+
+아래와 같이 명령을 실행하여 원하는 데이터베이스에 접속할 수 있음.
+
+mysql -h호스트명 -uDB명 -p 데이터베이스이름
+
+
+DB이름이 connectdb, DB계정이 connectuser, 암호가 connect123!@#일 경우
+콘솔창에서 다음과 같이 입력
+
+mysql -h127.0.0.1 -uconnectuser -p connectdb [enter]
+
+
+[MySQL 연결끊기]
+
+프롬프트에서 quit 혹은 exit이라 입력.
+
+
+[MySQL 버전과 현재 날짜 구하기]
+
+mysql> SELECT VERSION(), CURRENT_DATE;
+
+
+프롬프트에서는 SQL을 입력. SQL은 세미콜론(;)으로 끝남.
+SQL은 쿼리(Query)라고 읽음. 쿼리는 DBMS에게 명령을 내릴 때 사용하는 문장이라 생각하면 쉬움.
+
+SELECT는 어떤 내용을 조회할 때 사용하는 키워드.
+MySQL은 쿼리에 해당하는 결과의 전체 ROW를 출력하고 마지막에 전체 ROW수와 쿼리 실행에 걸린 시간을 표시.
+
+
+*키워드는 대소문자를 구별하지 않음.
+
+* 쿼리를 이용해 계산식의 결과도 구할 수 있음.
+
+mysql> SELECT SIN(PI()/4), (4+1)*5;
+
+* 여러 문장을 한 줄에 연속으로 붙여서 실행 가능.
+
+mysql> SELECT VERSION(); SELECT NOW();
+
+* 하나의 SQL은 여러 줄로 입력 가능하다.
+  MySQL은 문장의 끝을 라인으로 구분하는 것이 아니라 세미콜론으로 구분하기 때문에
+  여러 줄에 걸쳐 문장을 쓰는 것도 가능.
+
+* SQL을 입력하는 도중에 취소할 수 있음.
+  긴 쿼리를 작성하다가 중간에 취소해야 하는 경우,
+  즉시 \c를 붙여주면 됨.
+
+
+[DBMS에 존재하는 데이터베이스 확인하기]
+
+작업하기 위한 데이터베이스를 선택하기 위해서는 어떤 데이터베이스가 존재하는지 알아봐야 함.
+현재 서버에 존재하는 데이터베이스를 찾아보기 위해 SHOW statement를 사용.
+
+mysql> SHOW DATABASES;
+
+
+[사용중인 데이터베이스 전환하기]
+
+Database를 선택하기 위해, "use" command 사용.
+
+mysql> use mydb;
+
+데이터베이스를 전환하려면, 이미 데이터베이스가 존재해야 하며
+현재 접속중인 계정이 해당 데이터베이스를 사용할 수 있는 권한이 있어야 함.
+
+
+[테이블(table)의 구성 요소]
+
+테이블 : RDBMS의 기본적 저장구조. 한 개 이상의 column과 0개 이상의 row로 구성.
+열(Column) : 테이블 상에서의 단일 종류의 데이터를 나타냄. 특정 데이터 타입 및 크기를 가지고 있음.
+행(Row) : Column들의 값의 조합. 레코드라고 불린다.
+          기본키(PK)에 의해 구분됨. 기본키는 중복을 허용하지 않으며 없어서는 안됨.
+Field : Row와 Column의 교차점으로, Field는 데이터를 포함할 수 있고 없을 때에는 NULL값을 가짐.
+
+
+[현재 데이터베이스에 존재하는 테이블 목록 확인하기]
+
+Database를 선택 후, Database의 전체 태이블 목록을 출력.
+
+mysql> show tables;
+
+"empty set"은 데이터베이스에 어떤 테이블도 아직 생성되지 않았다는 것.
+
+
+[SQL 연습을 위한 테이블 생성과 값의 저장]
+
+- examples.sql을 다운로드
+- 터미널에서 examples.sql이 있는 폴더로 이동한 후, 다음과 같이 명령을 수행.
+  명령을 수행한 후 암호를 입력.
+
+  mysql -uconnectuser -p connectdb < examples.sql
+
+- examples.sql에는 연습을 위한 테이블 생성문과 해당 테이블에 값을 저장하는 입력문이 존재.
+
+
+[테이블 구조를 확인하기 위한 DESCRIBE 명령]
+
+table 구조를 확인하기 위해, DESCRIBE 명령을 사용할 수 있음.
+짧게 DESC라고 사용해도 됨.
