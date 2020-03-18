@@ -1,0 +1,77 @@
+[[데이터 정의어(Data definition language, DDL)]]
+
+데이터베이스의 스키마 객체를 생성, 변경, 제거하는 일을 수행
+
+
+[테이블 생성]
+
+CREATE TABLE 테이블명(
+    필드명1 타입 [NULL | NOT NULL][DEFAULT][AUTO_INCREMENT],
+    필드명2 타입 [NULL | NOT NULL][DEFAULT][AUTO_INCREMENT],
+    필드명3 타입 [NULL | NOT NULL][DEFAULT][AUTO_INCREMENT],
+    ......
+    PRIMARY KEY(필드명)
+);
+
+- 데이터 형 외에도 속성값의 빈 값 허용 여부는 NULL 또는 NOT NULL로 설정
+- DEFAULT 키워드와 함께 입력하지 않았을 때의 초기값을 지정할 수 있음
+- 입력하지 않고 자동으로 1씩 증가하는 번호를 위한 AUTO_INCREMENT
+
+예제)
+employee와 같은 구조를 가진 employee2 테이블을 생성
+
+create table employee2(
+    empno integer not null primary key,
+    name varchar(10),
+    job varchar(9),
+    boss integer,
+    hiredate varchar(12),
+    salary decimal(7,2),
+    comm decimal(7,2),
+    deptno integer
+);
+
+
+[테이블 수정(컬럼 추가 / 삭제)]
+
+ALTER TABLE 테이블명
+    ADD 필드명 타입 [NULL | NOT NULL][DEFAULT ][AUTO_INCREMENT];
+
+ALTER TABLE 테이블명
+    DROP 필드명;
+
+예제)
+employee2 테이블에 생일(birthdate)칼럼을 varchar(12)형식으로 추가
+
+alter table employee2 add birthdate varchar(12);
+
+
+[테이블 수정(컬럼 수정)]
+
+ALTER TABLE 테이블명
+    CHANGE 필드명 새필드명 타입 [NULL | NOT NULL][DEFAULT ][AUTO_INCREMENT];
+
+- change 키워드를 사용하고 칼럼을 새롭게 재정의(이름부터 속성까지 전부)
+
+예제)
+employee2 테이블의 부서번호(deptno)를 dept_no로 수정
+
+alter table employee2 change deptno dept_no int(11);
+
+
+[테이블 이름 변경]
+
+ALTER TABLE 테이블명 RENAME 변경이름
+
+예제)
+employee2 테이블의 이름을 employee3로 변경
+
+alter table employee2 rename employee3;
+
+
+[테이블 삭제하기]
+
+DROP TABLE 테이블이름;
+
+- 참고로 제약조건이 있는 경우에는 DROP TABLE 명령으로도 테이블이 삭제되지 않을 수 있음(참조관계 등).
+  그럴 경우는 테이블을 생성한 반대 순서로 삭제해야 함.
