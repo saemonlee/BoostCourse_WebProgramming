@@ -1,0 +1,138 @@
+<웹 API 실습>
+
+1. 프로젝트 생성
+
+Maven 프로젝트 생성
+
+org.apache.maven.archetypes / maven-archetype-webapp
+group id : kr.or.connect
+artifact id : webapiexam
+
+
+2. jdk1.8을 사용하기 위해 pom.xml 수정
+
+- jdbc라이브러리 추가
+- json데이터를 이용하기 위해 json라이브러리 추가
+- 서블릿api 추가
+- jstl 추가
+
+저장 후 maven -> update project
+
+
+3. jst.web 버전 수정
+
+내비게이터 탭을 이용
+
+.settings -> org.eclipse.wst.common.project.facet.core.xml
+jst.web의 버전을 3.1로 수정
+
+재시작 -> properties -> project facets
+-> dynamic web module이 3.1버전으로 바뀌어 있는 것을 확인
+
+
+4. Web.xml 삭제
+
+src -> main -> webapp -> WEB-INF를 보면 Web.xml 존재
+이 예제에서는 annotation을 이용해 서블릿을 설정할 것이기 때문에,
+이 파일을 삭제
+
+삭제 후엔 failOnMissingWebXml 엘리먼트를 추가해야 오류가 발생하지 않음
+
+
+5. java 폴더 생성
+
+src -> main 디렉토리에 Java라는 폴더 생성
+이 폴더에는 자바 패키지와 클래스 등이 저장됨
+
+
+6. 패키지 생성
+
+java 폴더에 new -> package로 패키지 생성
+
+name : kr.or.connect.webapiexam.api
+
+
+7. 지난번에 만들었던 패키지를 복사
+
+(이클립스에서 파일 카피 등을 할 때에는 반드시 이클립스 위에서 할 것)
+
+jdbcexam.dto
+jdbcexam.dao
+
+
+8. 설명
+
+준비가 끝났으면, 몇 가지 설명
+
+- GET 방식은 읽어오는 것
+GET /roles : roles의 모든 정보를 보여줌
+GET /roles/{roleId} : roles 중에 roleId에 해당하는 것만 읽어옴
+
+- POST는 삽입
+POST /roles : roles에 한 건 넣어달라는 의미
+
+- PUT은 갱신
+PUT /roles
+
+- DELETE는 삭제
+
+
+이 부분들을 하나의 서블릿으로 처리할 수는 없을 것
+그리고 GET방식은 doGet이라는 메서드에서,
+POST는 doPost라는 메서드에서,
+DELETE doDelete 같은 HTTP 메서드 요청을 구현해야 함
+
+이런 부분을 인지한 상태에서,
+모든 role의 정보를 보여주는 rolesServlet.java 클래스를 먼저 작성
+
+
+9. 서블릿 생성
+
+kr.or.connect.webapiexam.api -> new -> servlet
+
+name : rolesServlet
+URL Mappings : /roles
+doGet메서드만 오버라이딩
+
+이 서블릿의 실행 결과 보여지는 게 json 메시지.
+json은 JavaScript Obsect Notation의 약어로, 아주 가벼운 형태의 메시지 교환형식.
+자바스크립트에서는 객체로 만들 때 사용하는 표현식이기도 함.
+
+대괄호 : 배열, 리스트를 의미
+중괄호 : 객체 한 건을 의미
+        안에는 작은 따옴표나 큰 따옴표로 묶인 속성명이 나옴
+        콜론 다음에는 값이 나옴
+        숫자는 작은 따옴표나 큰 따옴표로 묶이지 않고,
+        문자열만 큰 따옴표로 묶임
+
+JDBC소스에서 Role에 대한 데이터를 가져왔고,
+이렇게 가져온 것을 JSON 형태로 바꿔서 응답 결과를 보냈는데,
+이렇게 보낸 응답 결과가 그대로 출력됨
+
+
+이렇게 수행했는데 Maven이 어떤 라이브러리를 제대로 인식하지 못하는 경우
+
+파일 탐색기를 열어 User -> 사용자명 -> .m2 -> repository
+사용하고 있는 라이브러리들이 다 여기에 들어있음.
+이 부분을 제대로 못 읽어오는 등의 문제가 발생했을 때,
+Maven dependencies에 다 있지만 제대로 import되지 않는 등의 문제가 종종 발생함.
+
+이럴 경우 이클립스를 닫고 .m2 디렉토리 삭제.
+그 후 다시 이클립스를 열고 Maven -> update project
+
+
+10. 아이디 한 건에 대해 role 정보를 읽어오는 서블릿 작성
+
+new -> servlet
+
+package : kr.or.connect.webapiexam.api
+name : RoleByIdServlet
+URL Mappings : /roles/*
+overriding : doGet
+
+실행하면 오류가 발생.
+* 부분을 실제 아이디로 바꾸어 실행.
+
+서블릿을 이용해 api를 만드는 건 불편.
+이 불편을 해결하기 위해 여러 기술들이 등장.
+그 중 대표적인 것이 Spring Framework
